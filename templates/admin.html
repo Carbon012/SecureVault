@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 style="color: darkred;">Admin Dashboard</h3>
+    <p>Access Level: <strong>Elevated</strong></p>
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
+    <hr>
+    
+    <p>Total Secure Notes in Database: <strong>{{ total_notes }}</strong></p>
+
+    <h4>Registered Users</h4>
+    <table>
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Failed Logins</th>
+            <th>Notes Count</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.failed_logins }}</td>
+            <td>{{ user.notes|length }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

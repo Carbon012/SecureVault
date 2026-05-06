@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #d8a79d; /* soft pink */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Card */
+.login-container {
+    text-align: center;
+    width: 320px;
+}
+
+/* Avatar Circle */
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #5f6f7a;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 
+        5px 5px 10px #c8968c,
+        -5px -5px 10px #eab8ae;
+}
+
+.avatar i {
+    color: white;
+    font-size: 35px;
+}
+
+/* Title */
+h2 {
+    color: #f3e8e4;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+/* Input Wrapper */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px 45px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background: #5f6f7a;
+    color: white;
+    font-size: 14px;
+
+    box-shadow:
+        inset 3px 3px 6px #4e5c65,
+        inset -3px -3px 6px #70828f;
+}
+
+/* Icons inside input */
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #cfd8dc;
+}
+
+/* Placeholder */
+input::placeholder {
+    color: #cfd8dc;
+}
+
+/* Remember + Forgot */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #f3e8e4;
+    margin-bottom: 20px;
+}
+
+/* Checkbox */
+.options input {
+    width: auto;
+    margin-right: 5px;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: #5f6f7a;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+
+    box-shadow:
+        5px 5px 10px #c8968c,
+        -5px -5px 10px #eab8ae;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    box-shadow:
+        inset 3px 3px 6px #4e5c65,
+        inset -3px -3px 6px #70828f;
+}
+
+/* 🔥 FORCE dashboard layout to behave properly */
+.dashboard-page {
+    display: block !important;
+}
+
+/* Prevent form from stretching weirdly */
+.note-card form {
+    display: inline;
+}
+
+/* Fix spacing */
+.container form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Make sure text doesn't collapse */
+.note-card span {
+    flex: 1;
+}

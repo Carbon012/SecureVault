@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<div class="login-container">
+
+    <div class="avatar">
+        <i class="fa fa-user-plus"></i>
+    </div>
+
+    <h2>REGISTER</h2>
+
+    <form method="POST">
+
+        <div class="input-group">
+            <i class="fa fa-user"></i>
+            <input type="text" name="username" placeholder="Username" required>
+        </div>
+
+        <div class="input-group">
+            <i class="fa fa-lock"></i>
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="input-group">
+            <i class="fa fa-lock"></i>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        </div>
+
+        <button type="submit">REGISTER</button>
+
+    </form>
+
+    <p style="margin-top: 15px; color: white;">
+        Already have an account?
+        <a href="{{ url_for('auth.login') }}" style="color: #2f5f7f;">Login</a>
+    </p>
+
+</div>
+
+{% endblock %}
