@@ -1,39 +1,93 @@
 {% extends "base.html" %}
+
 {% block content %}
 
-<div class="container">
+<div class="dashboard">
 
-    <div class="user-info">
-        <div>
-            <h3>User Dashboard</h3>
-            <p>Logged in as: <strong>{{ current_user.username }}</strong></p>
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo" style="color: white;">
+            🔐 SecureVault
         </div>
 
-        <a class="logout-btn" href="{{ url_for('auth.logout') }}">Logout</a>
+        <div class="user-box">
+            <div class="user-circle">
+                {{ current_user.username[0]|upper }}
+            </div>
+
+            <h3>{{ current_user.username }}</h3>
+            <p>Secure User</p>
+        </div>
+
+        <a href="{{ url_for('auth.logout') }}" class="logout-btn">
+            Logout
+        </a>
+
     </div>
 
-    <hr>
+    <!-- Main Content -->
+    <div class="main-content">
 
-    <h4>Add Secure Note</h4>
+        <!-- Top -->
+        <div class="top-bar">
+    <h1>Your Secure Notes</h1>
+</div>
 
-    <form method="POST">
-        <input type="text" name="secret_text" placeholder="Enter sensitive data..." required>
-        <button type="submit">Encrypt & Save</button>
-    </form>
+<div class="subtitle-bar">
+    <p>Encrypted storage dashboard</p>
+</div>
+        <!-- Add Note -->
+        <div class="add-note-card">
 
-    <h4>Your Decrypted Notes</h4>
+            <form method="POST">
 
-    {% for note in notes %}
-        <div class="note-card">
-            <span>{{ note.content }}</span>
+                <textarea
+                    name="secret_text"
+                    placeholder="Write your secure encrypted note..."
+                    required
+                ></textarea>
 
-            <form action="{{ url_for('user.delete_note', note_id=note.id) }}" method="POST">
-                <button type="submit">Delete</button>
+                <button type="submit">
+                    Encrypt & Save
+                </button>
+
             </form>
+
         </div>
-    {% else %}
-        <p>No secure notes found.</p>
-    {% endfor %}
+
+        <!-- Notes Grid -->
+        <div class="notes-grid">
+
+            {% for note in notes %}
+
+            <div class="note-card-modern">
+
+                <div class="note-text">
+                    {{ note.content }}
+                </div>
+
+                <form action="{{ url_for('user.delete_note', note_id=note.id) }}" method="POST">
+
+                    <button class="delete-btn" type="submit">
+                        Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-card">
+                No secure notes yet 🔒
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
 
 </div>
 

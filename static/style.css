@@ -122,24 +122,276 @@ button:active {
         inset -3px -3px 6px #70828f;
 }
 
-/* 🔥 FORCE dashboard layout to behave properly */
+/* ========================= */
+/* MODERN DASHBOARD */
+/* ========================= */
+
 .dashboard-page {
-    display: block !important;
+    background: #0f172a;
+    min-height: 100vh;
+    color: white;
 }
 
-/* Prevent form from stretching weirdly */
-.note-card form {
-    display: inline;
-}
-
-/* Fix spacing */
-.container form {
+/* Main Layout */
+.dashboard {
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    min-height: 100vh;
 }
 
-/* Make sure text doesn't collapse */
-.note-card span {
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 260px;
+    height: 500px;
+
+    background: #07142c;
+
+    border-radius: 28px;
+
+    padding: 20px 25px;
+
+    padding-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+
+    box-shadow:
+        10px 10px 25px rgba(0,0,0,0.25),
+        -5px -5px 15px rgba(255,255,255,0.05);
+}
+/* Logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    border: 1px solid black;
+}
+
+/* User */
+.user-box {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-circle {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+    background: #2f5f7f;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 32px;
+    font-weight: bold;
+
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.user-box h3 {
+    margin-bottom: 5px;
+    color: white;
+}
+
+.user-box p {
+    color: white;
+    font-size: 14px;
+}
+
+/* Logout */
+.logout-btn {
+    margin-top: auto;
+
+    background: #ef4444;
+    color: white;
+
+    padding: 12px 20px;
+    border-radius: 10px;
+
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.main-content {
     flex: 1;
+    padding: 40px;
+}
+
+/* Top Bar */
+.top-bar {
+    background: #07142c;
+
+    padding: 25px 35px;
+
+    border-radius: 24px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        10px 10px 25px rgba(0,0,0,0.25),
+        -5px -5px 15px rgba(255,255,255,0.05);
+}
+.top-bar h1 {
+    font-size: 34px;
+    margin-bottom: 8px;
+    color: white;
+    margin-top: 0.1px;
+}
+
+.top-bar p {
+    color: #d1d5db;
+    margin-top: 5px;
+}
+.subtitle-bar {
+    background: #07142c;
+
+    padding: 2px 35px;
+
+    border-radius: 24px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        10px 10px 25px rgba(0,0,0,0.25),
+        -5px -5px 15px rgba(255,255,255,0.05);
+}
+
+.subtitle-bar p {
+    color: white;
+    font-size: 18px;
+}
+/* ================= ADD NOTE ================= */
+
+.add-note-card {
+    background: #1e293b;
+
+    padding: 25px;
+    border-radius: 18px;
+
+    margin-bottom: 35px;
+}
+
+/* Form */
+.add-note-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Textarea */
+.add-note-card textarea {
+    width: 100%;
+
+    min-height: 140px;
+
+    border: none;
+    outline: none;
+
+    background: #0f172a;
+    color: white;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    font-size: 15px;
+
+    resize: vertical;
+
+    box-sizing: border-box;
+}
+/* Button */
+.add-note-card button {
+    width: fit-content;
+
+    background: #2f5f7f;
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.add-note-card button:hover {
+    background: #41779d;
+}
+
+/* ================= NOTES GRID ================= */
+
+.notes-grid {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 20px;
+}
+
+/* Note Card */
+.note-card-modern {
+    background: #1e293b;
+
+    padding: 20px;
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 100px;
+
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.25);
+}
+
+/* Note Text */
+.note-text {
+    color: #e5e7eb;
+
+    line-height: 1.6;
+    word-wrap: break-word;
+
+    margin-bottom: 20px;
+}
+
+/* Delete Button */
+.delete-btn {
+    background: #ef4444;
+    color: white;
+
+    border: none;
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Empty */
+.empty-card {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    color: #9ca3af;
 }
