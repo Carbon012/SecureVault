@@ -53,7 +53,7 @@
             </div>
 
             <div class="stat-card">
-                <h2>{{ failed_attempts }}</h2>
+                <h2>{{ failed_logins }}</h2>
                 <p>Failed Logins</p>
             </div>
 
@@ -64,7 +64,7 @@
 
             <h2>Add New User</h2>
 
-            <form method="POST">
+            <form method="POST" action="/admin/add_user">
 
                 <input
                     type="text"

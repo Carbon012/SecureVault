@@ -7,7 +7,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(256), nullable=False)
     role = db.Column(db.String(50), nullable=False, default='User')
     failed_logins = db.Column(db.Integer, default=0) # Advanced: Brute-force protection
-    notes = db.relationship('Note', backref='author', lazy=True)
+    notes = db.relationship('Note', backref='author', lazy=True, cascade='all, delete-orphan')
 
     @property
     def note_count(self):

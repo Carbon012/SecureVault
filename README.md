@@ -1,45 +1,128 @@
-🔐 SecureVault
-SecureVault is a modular Flask-based web application designed for secure note-taking. It implements industry-standard security practices, including hashed password storage, role-based access control (RBAC), and brute-force protection.
 
-🚀 Features
-• User Authentication: Secure registration and login using Flask-Login.
-• Password Security: Industry-standard hashing via Werkzeug.
-• Brute-Force Protection: Automatic account lockout after 5 failed login attempts.
-• Role-Based Access Control (RBAC): Distinct permissions for User and Admin accounts.
-• Admin Dashboard: Centralized view for managing users and monitoring system stats.
-• Database: Persistent storage using SQLite.
+# 🔐 SecureVault
 
-🛠️ Tech Stack
-• Backend: Python (Flask)
-• Database: SQLite / SQLAlchemy (ORM)
-• Security: Flask-Login, Werkzeug (Hashing), Custom Decorators
-• Frontend: Jinja2 Templates, CSS3
+SecureVault is a secure, modular web application for managing encrypted notes and user accounts. Built with Flask, it demonstrates best practices in authentication, RBAC, brute-force protection, and data encryption—making it ideal for learning and real-world secure note management.
 
-📦 Project Structure
+---
+
+## 🚀 Features
+
+- **User Authentication:** Secure registration and login with hashed passwords (Werkzeug, Flask-Login).
+- **Brute-Force Protection:** Accounts are locked after 5 failed login attempts.
+- **Role-Based Access Control:** Separate roles for Admin and User, with strict route protection.
+- **Admin Dashboard:** View system stats, manage users, and monitor failed login attempts.
+- **User Management:** Admins can add or delete users (except other admins).
+- **Encrypted Notes:** All notes are encrypted at rest using AES (Fernet).
+- **Flash Messaging:** Modern, animated pop-up notifications for all actions.
+- **Responsive UI:** Clean, accessible interface with clear feedback.
+
+---
+
+## 🏗️ Project Structure
+
+```
 SecureVault/
-├── models/             # Database schemas (User, Note)
-├── routes/             # Blueprint-based routing (Auth, Admin, User)
-├── static/             # CSS and Assets
-├── templates/          # HTML files (Login, Register, Dashboard)
-├── utils/              # Security decorators and helper functions
-├── app.py              # Main application entry point
-├── config.py           # Configuration settings
-└── securevault.db      # SQLite Database
+├── app.py                # Application factory and entry point
+├── config.py             # Configuration (secret keys, etc.)
+├── requirements.txt      # Python dependencies
+├── models/
+│   ├── __init__.py       # SQLAlchemy instance
+│   ├── user_model.py     # User schema and logic
+│   └── note_model.py     # Note schema and logic
+├── routes/
+│   ├── __init__.py
+│   ├── admin_routes.py   # Admin dashboard and user management
+│   ├── auth_routes.py    # Registration, login, logout
+│   └── user_routes.py    # User dashboard and note management
+├── utils/
+│   ├── __init__.py
+│   ├── encryption.py     # Fernet-based encryption helpers
+│   └── security.py       # RBAC decorators, password checks
+├── templates/
+│   ├── base.html         # Main layout
+│   ├── login.html        # Login page
+│   ├── register.html     # Registration page
+│   ├── dashboard.html    # User dashboard
+│   └── admin.html        # Admin dashboard
+├── static/
+│   └── style.css         # Custom CSS
+└── securevault.db        # SQLite database (auto-created)
+```
 
-⚙️ Installation & Setup
-1.Clone the repository:
-git clone https://github.com/Carbon012/SecureVault.git
-cd SecureVault
-2.Set up a virtual environment:
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-3.Install dependencies:
-pip install -r requirements.txt
-4. Run the application:
-python app.py
-Access the app at http://127.0.0.1:5000
+---
 
-🛡️ Security Implementation Details
-• Account Lockout: If a user provides an incorrect password 5 times, the failed_logins counter triggers a lockout. Only an administrator can reset this counter via the database.
-• Route Protection: The @admin_required decorator ensures that sensitive endpoints (like the Admin Dashboard) are inaccessible to standard users, even if they are logged in.
-Developed by Hammad Cybersecurity & Software Engineering Student
+## 🛡️ Security Architecture
+
+- **Password Hashing:** All passwords are hashed with PBKDF2 (sha256) before storage.
+- **Session Management:** Flask-Login ensures secure session handling.
+- **RBAC:** Custom decorators enforce admin-only access to sensitive routes.
+- **Brute-Force Lockout:** After 5 failed logins, accounts are locked until admin resets.
+- **Encryption:** Notes are encrypted using Fernet (AES) before being saved.
+- **Cascading Deletes:** Deleting a user also deletes their notes, preventing orphaned data.
+
+---
+
+## ⚙️ Setup & Installation
+
+1. **Clone the repository:**
+	```bash
+	git clone https://github.com/YourUsername/SecureVault.git
+	cd SecureVault
+	```
+
+2. **Create and activate a virtual environment:**
+	```bash
+	python -m venv venv
+	# On Windows:
+	venv\Scripts\activate
+	# On Mac/Linux:
+	source venv/bin/activate
+	```
+
+3. **Install dependencies:**
+	```bash
+	pip install -r requirements.txt
+	```
+
+4. **Run the application:**
+	```bash
+	python app.py
+	```
+	The app will be available at [http://127.0.0.1:5000](http://127.0.0.1:5000).
+
+5. **Default Admin Account:**
+	- On first run, an admin account is auto-created:
+	  - Username: `admin`
+	  - Password: `Admin123!`
+	- Change this password after first login for security.
+
+---
+
+## 🖥️ How It Works
+
+- **Login/Registration:** Users register and log in securely. Passwords are never stored in plaintext.
+- **User Dashboard:** Users can create, view, and manage their encrypted notes.
+- **Admin Dashboard:** Admins see system stats, failed login attempts, and manage users.
+- **User Management:** Admins can add or delete users (but not other admins).
+- **Security Feedback:** All actions provide clear, animated feedback via pop-up messages.
+- **Brute-Force Monitoring:** The admin dashboard shows total failed login attempts for all users.
+
+---
+
+## 🧑‍💻 Development & Customization
+
+- All configuration is in `config.py`.
+- Add new features by extending the `routes/`, `models/`, or `utils/` modules.
+- UI is built with Jinja2 templates and CSS for easy customization.
+
+---
+
+## 📄 License
+
+This project is for educational and demonstration purposes. For production use, review and enhance all security settings.
+
+---
+
+## 👤 Author
+
+Developed by Hammad — Cybersecurity & Software Engineering Student
