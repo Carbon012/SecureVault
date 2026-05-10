@@ -1,29 +1,160 @@
 {% extends "base.html" %}
-{% block content %}
-    <h3 style="color: darkred;">Admin Dashboard</h3>
-    <p>Access Level: <strong>Elevated</strong></p>
-    <a href="{{ url_for('auth.logout') }}">Logout</a>
-    <hr>
-    
-    <p>Total Secure Notes in Database: <strong>{{ total_notes }}</strong></p>
 
-    <h4>Registered Users</h4>
-    <table>
-        <tr>
-            <th>User ID</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Failed Logins</th>
-            <th>Notes Count</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.role }}</td>
-            <td>{{ user.failed_logins }}</td>
-            <td>{{ user.notes|length }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+{% block content %}
+
+<div class="admin-page">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <div class="logo">
+            🛡️ SecureVault Admin
+        </div>
+
+        <div class="user-box">
+
+            <div class="user-circle">
+                A
+            </div>
+
+            <h3>Administrator</h3>
+            <p>Elevated Access</p>
+
+        </div>
+
+        <a href="{{ url_for('auth.logout') }}" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="admin-main">
+
+        <!-- TOP -->
+        <div class="top-bar">
+
+            <h1>Admin Dashboard</h1>
+            <p>SecureVault User Management System</p>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <h2>{{ total_users }}</h2>
+                <p>Total Users</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>{{ total_notes }}</h2>
+                <p>Total Notes</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>{{ failed_attempts }}</h2>
+                <p>Failed Logins</p>
+            </div>
+
+        </div>
+
+        <!-- ADD USER -->
+        <div class="add-user-card">
+
+            <h2>Add New User</h2>
+
+            <form method="POST">
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    required
+                >
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                >
+
+
+                <input type="hidden" name="role" value="User">
+
+                <button type="submit">
+                    Add User
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- USERS TABLE -->
+        <div class="table-card">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Failed Logins</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for user in users %}
+
+                    <tr>
+
+                        <td>{{ user.id }}</td>
+
+                        <td>{{ user.username }}</td>
+
+                        <td>
+
+                            {% if user.role == "admin" %}
+                                <span class="role-admin">Admin</span>
+                            {% else %}
+                                <span class="role-user">User</span>
+                            {% endif %}
+
+                        </td>
+
+                        <td>{{ user.failed_logins }}</td>
+
+                        <td>{{ user.note_count }}</td>
+
+                        <td>
+                            {% if user.role != "admin" %}
+                            <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST">
+                                <button class="delete-btn">Delete</button>
+                            </form>
+                            {% else %}
+                            <span class="na-text">N/A</span>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}
